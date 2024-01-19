@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Local files
+*.local.*
+
+# Generated
+generated/
