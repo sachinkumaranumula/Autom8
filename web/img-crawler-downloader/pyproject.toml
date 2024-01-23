@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "img-crawler-downloader"
+version = "0.1.0"
+description = "Crawls paginated sites and pulls all images"
+authors = ["Sachin Kumar Anumula"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "~3.12"
+bs4 = "^0.0.2"
+requests = "^2.31.0"
+conda-lock = "^2.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,15 @@
+name: img-crawler-downloader
+channels:
+  - pytorch
+  - conda-forge
+  # We want to have a reproducible setup, so we don't want default channels,
+  # which may be different for different users. All required channels should
+  # be listed explicitly here.
+  - nodefaults
+dependencies:
+  - conda-tree
+  - python=3.12.*  # or don't specify the version and use the latest stable Python
+  - poetry=1.*  # or 1.1.*, or no version at all -- as you want
+#  - pytorch::pytorch=2.1.1
+#  - pytorch::torchaudio=2.1.1
+#  - pytorch::torchvision=0.16.1
