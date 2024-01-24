@@ -1,0 +1,29 @@
+{
+    "job": {
+        "name": "azure-architecture-center",
+        "description": "Gets all architectural drawings from Azure Architecture Center",
+        "tags": [
+            "azure",
+            "visio"
+        ]
+    },
+    "crawler": {
+        "baseUrl": "https://learn.microsoft.com/",
+        "apiUrl": "api/contentbrowser/search/architectures",
+        "locale": "en-us",
+        "query": {
+            "filter": {
+                "products": [],
+                "categories": []
+            },
+            "params": {
+                "pageParam": "skip",
+                "limit": 4
+            }
+        },
+        "selector": {
+            "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
+        }
+    },
+    "downloader": {}
+}

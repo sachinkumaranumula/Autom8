@@ -1,0 +1,820 @@
+{
+  "results": [
+    {
+      "summary": "Use the Saga design pattern to ensure data consistency on distributed transactions in microservices architectures.",
+      "azure_categories": [
+        "databases"
+      ],
+      "display_azure_categories": [
+        "Databases"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/saga-overview.png",
+      "title": "Saga distributed transactions pattern",
+      "last_modified": "2022-07-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure"
+      ],
+      "display_products": [
+        "Azure"
+      ],
+      "url": "/azure/architecture/reference-architectures/saga/saga"
+    },
+    {
+      "summary": "This article introduces the approaches you can consider when planning a multitenant architecture.",
+      "azure_categories": [
+        "management-and-governance",
+        "security"
+      ],
+      "display_azure_categories": [
+        "Management and Governance",
+        "Security"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/deployment-stamps.png",
+      "title": "Architectural approaches for a multitenant solution",
+      "last_modified": "2023-02-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure"
+      ],
+      "display_products": [
+        "Azure"
+      ],
+      "url": "/azure/architecture/guide/multitenant/approaches/overview"
+    },
+    {
+      "summary": "Learn how the activity of one tenant can impact the performance of other tenants in a multitenant system.",
+      "azure_categories": [
+        "management-and-governance",
+        "security"
+      ],
+      "display_azure_categories": [
+        "Management and Governance",
+        "Security"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/noisy-neighbor-single.png",
+      "title": "Noisy Neighbor antipattern",
+      "last_modified": "2023-03-14T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure"
+      ],
+      "display_products": [
+        "Azure"
+      ],
+      "url": "/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor"
+    },
+    {
+      "summary": "Deploy SWIFT Alliance Lite2 on Azure. Migrate an existing deployment from on-premises or create a new deployment.",
+      "azure_categories": [
+        "integration"
+      ],
+      "display_azure_categories": [
+        "Integration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/diagrams-swift-alliance-lite2-azure.png",
+      "title": "SWIFT Alliance Lite2 on Azure",
+      "last_modified": "2023-03-23T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-virtual-network",
+        "azure-firewall",
+        "azure-policy",
+        "azure-bastion",
+        "azure-expressroute"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Virtual Network",
+        "Azure Firewall",
+        "Azure Policy",
+        "Azure Bastion",
+        "Azure ExpressRoute"
+      ],
+      "url": "/azure/architecture/example-scenario/finance/swift-alliance-lite2-on-azure"
+    },
+    {
+      "summary": "Build an app deployment pipeline for containerized apps on AKS hybrid that are running on Azure Stack HCI or Windows Server.",
+      "azure_categories": [
+        "containers",
+        "hybrid"
+      ],
+      "display_azure_categories": [
+        "Containers",
+        "Hybrid + multicloud"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/aks-stack-hci.png",
+      "title": "Deploy and operate apps with AKS hybrid on Azure Stack HCI or Windows Server",
+      "last_modified": "2023-05-11T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-kubernetes-service",
+        "azure-stack-hci",
+        "azure-arc",
+        "github",
+        "azure-pipelines"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Kubernetes Service (AKS)",
+        "Azure Stack HCI",
+        "Azure Arc",
+        "GitHub",
+        "Azure Pipelines"
+      ],
+      "url": "/azure/architecture/example-scenario/hybrid/aks-hybrid-stack-hci"
+    },
+    {
+      "summary": "Build a CTFd service with Azure PaaS so you can manage your games while Azure takes care of the infrastructure.",
+      "azure_categories": [
+        "web"
+      ],
+      "display_azure_categories": [
+        "Web"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/architecture-ctfd.png",
+      "title": "Capture-the-Flag with CTFd on Azure PaaS",
+      "last_modified": "2023-04-27T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-database-mariadb",
+        "azure-key-vault",
+        "azure-log-analytics",
+        "azure-private-link",
+        "azure-container-registry"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Database for MariaDB",
+        "Azure Key Vault",
+        "Azure Log Analytics",
+        "Azure Private Link",
+        "Azure Container Registry"
+      ],
+      "url": "/azure/architecture/example-scenario/apps/capture-the-flag-platform-on-azure-paas"
+    },
+    {
+      "summary": "Use Azure Stream Analytics to ingest data to an Azure Synapse dedicated SQL pool in high throughput scenarios.",
+      "azure_categories": [
+        "analytics",
+        "iot",
+        "databases"
+      ],
+      "display_azure_categories": [
+        "Analytics",
+        "Internet of Things",
+        "Databases"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/stream-synapse.png",
+      "title": "High throughput stream ingestion to Azure Synapse",
+      "last_modified": "2022-06-08T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-synapse-analytics",
+        "azure-stream-analytics"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Synapse Analytics",
+        "Azure Stream Analytics"
+      ],
+      "url": "/azure/architecture/example-scenario/data/stream-ingestion-synapse"
+    },
+    {
+      "summary": "Build a serverless microservices solution on Azure Container Apps using Distributed Application Runtime (Dapr) and Kubernetes Event-Driven Autoscaling (KEDA).",
+      "azure_categories": [
+        "containers",
+        "web"
+      ],
+      "display_azure_categories": [
+        "Containers",
+        "Web"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/microservices-with-container-apps-dapr.png",
+      "title": "Deploy microservices with Azure Container Apps and Dapr",
+      "last_modified": "2022-06-24T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-container-apps",
+        "dotnet",
+        "azure-sql-database",
+        "azure-cosmos-db",
+        "azure-cache-redis"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Container Apps",
+        ".NET",
+        "Azure SQL Database",
+        "Azure Cosmos DB",
+        "Azure Cache for Redis"
+      ],
+      "url": "/azure/architecture/example-scenario/serverless/microservices-with-container-apps-dapr"
+    },
+    {
+      "summary": "In this example scenario, learn about the capabilities of IoT Edge (field) gateways and protocol (cloud) gateways.",
+      "azure_categories": [
+        "iot"
+      ],
+      "display_azure_categories": [
+        "Internet of Things"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/field-edge-gateways.svg",
+      "title": "Field and cloud edge gateways",
+      "last_modified": "2022-07-01T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-iot",
+        "azure-iot-edge"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure IoT",
+        "Azure IoT Edge"
+      ],
+      "url": "/azure/architecture/example-scenario/iot/field-cloud-edge-gateways"
+    },
+    {
+      "summary": "Use Azure Front Door, Azure Virtual Machine Scale Sets, and other Azure services to deploy a highly scalable and secure installation of WordPress.",
+      "azure_categories": [
+        "web"
+      ],
+      "display_azure_categories": [
+        "Web"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/wordpress-vm.png",
+      "title": "WordPress on virtual machines",
+      "last_modified": "2023-06-30T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-front-door",
+        "azure-key-vault",
+        "azure-load-balancer",
+        "azure-virtual-network",
+        "azure-vm-scalesets"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Front Door",
+        "Azure Key Vault",
+        "Azure Load Balancer",
+        "Azure Virtual Network",
+        "Azure Virtual Machine Scale Sets"
+      ],
+      "url": "/azure/architecture/example-scenario/infrastructure/wordpress-iaas"
+    },
+    {
+      "summary": "Learn how Autodesk Civil 3D for civil infrastructure design performs on an Azure virtual machine (VM).",
+      "azure_categories": [
+        "compute"
+      ],
+      "display_azure_categories": [
+        "Compute"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/hpc-civil-3d-thumb.png",
+      "title": "Deploy Autodesk Civil 3D on an Azure virtual machine",
+      "last_modified": "2023-03-09T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-virtual-machines",
+        "azure-virtual-network"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Virtual Machines",
+        "Azure Virtual Network"
+      ],
+      "url": "/azure/architecture/guide/hpc/civil-3d"
+    },
+    {
+      "summary": "Learn how to connect to edge resources or devices that are protected by firewalls. This architecture uses Azure Relay in a hybrid scenario.",
+      "azure_categories": [
+        "hybrid"
+      ],
+      "display_azure_categories": [
+        "Hybrid + multicloud"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/hybrid-relay-connection.png",
+      "title": "Hybrid relay connection in Azure and Azure Stack Hub",
+      "last_modified": "2022-08-16T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-stack-hub",
+        "azure-virtual-machines"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Stack Hub",
+        "Azure Virtual Machines"
+      ],
+      "url": "/azure/architecture/solution-ideas/articles/hybrid-relay-connection"
+    },
+    {
+      "summary": "Charon-SSP cross-platform hypervisor emulates legacy Sun SPARC systems on industry standard x86-64 computer systems and VMs.",
+      "azure_categories": [
+        "migration"
+      ],
+      "display_azure_categories": [
+        "Migration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/solaris.png",
+      "title": "Stromasys Charon-SSP Solaris emulator on Azure VMs",
+      "last_modified": "2022-06-14T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-storage",
+        "azure-virtual-machines"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Storage",
+        "Azure Virtual Machines"
+      ],
+      "url": "/azure/architecture/solution-ideas/articles/solaris-azure"
+    },
+    {
+      "summary": "This example illustrates a migration of AIX logical partitions (LPARs) to Skytap on Azure.",
+      "azure_categories": [
+        "hybrid",
+        "migration"
+      ],
+      "display_azure_categories": [
+        "Hybrid + multicloud",
+        "Migration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/migrate-aix-workloads-to-azure-with-skytap.png",
+      "title": "Migrate AIX workloads to Azure with Skytap",
+      "last_modified": "2022-07-01T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-virtual-network",
+        "azure-private-link",
+        "azure-expressroute",
+        "azure-virtual-machines",
+        "azure-data-box-family"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Virtual Network",
+        "Azure Private Link",
+        "Azure ExpressRoute",
+        "Azure Virtual Machines",
+        "Azure Data Box Family"
+      ],
+      "url": "/azure/architecture/example-scenario/mainframe/migrate-aix-workloads-to-azure-with-skytap"
+    },
+    {
+      "summary": "Use Azure DNS Private Resolver to simplify hybrid recursive domain name system (DNS) resolution for on-premises and Azure workloads.",
+      "azure_categories": [
+        "hybrid",
+        "networking"
+      ],
+      "display_azure_categories": [
+        "Hybrid + multicloud",
+        "Networking"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/azure-dns-private-resolver-thumbnail.png",
+      "title": "Azure DNS Private Resolver",
+      "last_modified": "2022-07-19T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-dns",
+        "azure-expressroute",
+        "azure-firewall",
+        "azure-virtual-network",
+        "azure-vpn-gateway"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure DNS",
+        "Azure ExpressRoute",
+        "Azure Firewall",
+        "Azure Virtual Network",
+        "Azure VPN Gateway"
+      ],
+      "url": "/azure/architecture/example-scenario/networking/azure-dns-private-resolver"
+    },
+    {
+      "summary": "Refactor your Oracle database with Azure Database Migration Service and move it to PostgreSQL.",
+      "azure_categories": [
+        "databases",
+        "migration"
+      ],
+      "display_azure_categories": [
+        "Databases",
+        "Migration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/refactor.png",
+      "title": "Oracle database migration: Refactor",
+      "last_modified": "2022-07-01T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-database-postgresql",
+        "azure-database-migration",
+        "azure-virtual-network"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Database for PostgreSQL",
+        "Azure Database Migration service",
+        "Azure Virtual Network"
+      ],
+      "url": "/azure/architecture/example-scenario/oracle-migrate/oracle-migration-refactor"
+    },
+    {
+      "summary": "Get started on your architecture design by addressing the applicable PCI-DSS 3.2.1 requirements as a tenant on the AKS environment. The guidance covers the compliance aspects of the environment including infrastructure, interactions with the workload, operations, management, and interactions between services. Azure Kubernetes Service (AKS).",
+      "azure_categories": [
+        "containers",
+        "security"
+      ],
+      "display_azure_categories": [
+        "Containers",
+        "Security"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/aks-pci-intro.png",
+      "title": "Introduction of an AKS regulated cluster for PCI-DSS 3.2.1 (Part 1 of 9)",
+      "last_modified": "2021-11-11T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-kubernetes-service",
+        "azure-monitor"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Kubernetes Service (AKS)",
+        "Azure Monitor"
+      ],
+      "url": "/azure/architecture/reference-architectures/containers/aks-pci/aks-pci-intro"
+    },
+    {
+      "summary": "Learn about the Index Table pattern. Create indexes over the fields in data stores that are frequently referenced by queries.",
+      "azure_categories": [
+        "storage"
+      ],
+      "display_azure_categories": [
+        "Storage"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/index-table.png",
+      "title": "Index Table pattern",
+      "last_modified": "2022-07-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-storage"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Storage"
+      ],
+      "url": "/azure/architecture/patterns/index-table"
+    },
+    {
+      "summary": "Prioritize requests sent to services so that requests with a higher priority are received and processed more quickly than those with a lower priority.",
+      "azure_categories": [
+        "compute",
+        "web"
+      ],
+      "display_azure_categories": [
+        "Compute",
+        "Web"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/priority-queue-separate.png",
+      "title": "Priority Queue pattern",
+      "last_modified": "2022-07-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-service-bus"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Service Bus"
+      ],
+      "url": "/azure/architecture/patterns/priority-queue"
+    },
+    {
+      "summary": "Learn about the Publisher-Subscriber pattern, which enables an application to announce events to many interested consumers asynchronously.",
+      "azure_categories": [
+        "networking"
+      ],
+      "display_azure_categories": [
+        "Networking"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/enterprise-integration-queues.png",
+      "title": "Publisher-Subscriber pattern",
+      "last_modified": "2018-12-07T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-event-grid",
+        "azure-event-hubs",
+        "azure-service-bus"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Event Grid",
+        "Azure Event Hubs",
+        "Azure Service Bus"
+      ],
+      "url": "/azure/architecture/patterns/publisher-subscriber"
+    },
+    {
+      "summary": "Learn tips for how to troubleshoot a VPN gateway connection between an on-premises network and Azure.",
+      "azure_categories": [
+        "hybrid",
+        "networking"
+      ],
+      "display_azure_categories": [
+        "Hybrid + multicloud",
+        "Networking"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/default.png",
+      "title": "Troubleshoot a hybrid VPN connection",
+      "last_modified": "2022-07-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-virtual-network",
+        "azure-vpn-gateway"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Virtual Network",
+        "Azure VPN Gateway"
+      ],
+      "url": "/azure/architecture/reference-architectures/hybrid-networking/troubleshoot-vpn"
+    },
+    {
+      "summary": "Find the best available option for your use case when configuring Kubernetes clusters at the edge.",
+      "azure_categories": [
+        "containers"
+      ],
+      "display_azure_categories": [
+        "Containers"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/choose-bare-metal-kubernetes.png",
+      "title": "Choose a bare-metal Kubernetes at the edge platform option",
+      "last_modified": "2022-07-28T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-kubernetes-service"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Kubernetes Service (AKS)"
+      ],
+      "url": "/azure/architecture/operator-guides/aks/choose-bare-metal-kubernetes"
+    },
+    {
+      "summary": "Examine the Claim-Check pattern, which splits a large message into a claim check and a payload to avoid overwhelming a message bus.",
+      "azure_categories": [
+        "storage"
+      ],
+      "display_azure_categories": [
+        "Storage"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/claim-check.png",
+      "title": "Claim-Check pattern",
+      "last_modified": "2019-07-01T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-event-grid",
+        "azure-blob-storage"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Event Grid",
+        "Azure Blob Storage"
+      ],
+      "url": "/azure/architecture/patterns/claim-check"
+    },
+    {
+      "summary": "Use the Gateway Routing design pattern to route requests to multiple services using a single endpoint.",
+      "azure_categories": [
+        "networking"
+      ],
+      "display_azure_categories": [
+        "Networking"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/gateway-routing.png",
+      "title": "Gateway Routing pattern",
+      "last_modified": "2022-08-29T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-application-gateway"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Application Gateway"
+      ],
+      "url": "/azure/architecture/patterns/gateway-routing"
+    },
+    {
+      "summary": "This article provides guidance on implementing DNS to support private endpoints in a Virtual WAN network in a single region where the virtual hub has a Firewall with DNS Proxy enabled. The solution includes implementing a virtual WAN hub extension for DNS.",
+      "azure_categories": [
+        "networking",
+        "security"
+      ],
+      "display_azure_categories": [
+        "Networking",
+        "Security"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/dns-private-endpoints-virtual-wan-scenario-single-region-works.png",
+      "title": "Single region scenario - Private Link and DNS in Azure Virtual WAN",
+      "last_modified": "2023-04-26T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-private-link",
+        "azure-dns",
+        "azure-firewall",
+        "azure-virtual-wan"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Private Link",
+        "Azure DNS",
+        "Azure Firewall",
+        "Azure Virtual WAN"
+      ],
+      "url": "/azure/architecture/guide/networking/private-link-virtual-wan-dns-single-region-workload"
+    },
+    {
+      "summary": "Extend your mainframe applications to Azure by using the Verastream Host Integrator (VHI). VHI simplifies mainframe and host-based application functionality into a web service.",
+      "azure_categories": [
+        "migration"
+      ],
+      "display_azure_categories": [
+        "Migration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/extend-mainframe-applications-architecture-thumb.png",
+      "title": "Extend mainframe applications to Azure by using Verastream Host Integrator",
+      "last_modified": "2022-12-05T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "power-platform",
+        "azure",
+        "azure-virtual-machines",
+        "azure-virtual-network",
+        "azure-kubernetes-service",
+        "azure-monitor"
+      ],
+      "display_products": [
+        "Microsoft Power Platform",
+        "Azure",
+        "Azure Virtual Machines",
+        "Azure Virtual Network",
+        "Azure Kubernetes Service (AKS)",
+        "Azure Monitor"
+      ],
+      "url": "/azure/architecture/example-scenario/mainframe/extend-mainframe-applications"
+    },
+    {
+      "summary": "Enable a risk stratification model for surgeries.",
+      "azure_categories": [
+        "ai-machine-learning",
+        "analytics"
+      ],
+      "display_azure_categories": [
+        "AI + Machine Learning",
+        "Analytics"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/surgery-risk-models.png",
+      "title": "Implement risk prediction for surgeries",
+      "last_modified": "2022-07-14T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-machine-learning",
+        "azure-synapse-analytics",
+        "azure-data-factory",
+        "azure-data-lake",
+        "power-platform",
+        "power-bi"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Machine Learning",
+        "Azure Synapse Analytics",
+        "Azure Data Factory",
+        "Azure Data Lake",
+        "Microsoft Power Platform",
+        "Power BI"
+      ],
+      "url": "/azure/architecture/example-scenario/ai/risk-stratification-surgery"
+    },
+    {
+      "summary": "In this scenario, an e-commerce company in the travel industry uses Azure API Management to migrate a legacy web application.",
+      "azure_categories": [
+        "web",
+        "migration",
+        "integration"
+      ],
+      "display_azure_categories": [
+        "Web",
+        "Migration",
+        "Integration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/architecture-apim-api-scenario.png",
+      "title": "Migrate a web app by using Azure API Management",
+      "last_modified": "2022-12-01T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-api-management",
+        "azure-monitor",
+        "azure-app-service"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure API Management",
+        "Azure Monitor",
+        "Azure App Service"
+      ],
+      "url": "/azure/architecture/example-scenario/apps/apim-api-scenario"
+    },
+    {
+      "summary": "Learn how to manage Microsoft 365 tenant configuration by using Microsoft365DSC and Azure DevOps.",
+      "azure_categories": [
+        "management-and-governance",
+        "devops"
+      ],
+      "display_azure_categories": [
+        "Management and Governance",
+        "DevOps"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/manage-microsoft-365-tenant-configuration-microsoft365dsc-azure-devops.png",
+      "title": "Manage Microsoft 365 tenant configuration by using Microsoft365DSC and Azure DevOps",
+      "last_modified": "2023-05-02T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-devops",
+        "azure-key-vault",
+        "azure-virtual-machines-windows",
+        "m365"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure DevOps",
+        "Azure Key Vault",
+        "Azure Windows Virtual Machines",
+        "Microsoft 365"
+      ],
+      "url": "/azure/architecture/example-scenario/devops/manage-microsoft-365-tenant-configuration-microsoft365dsc-devops"
+    },
+    {
+      "summary": "Deploy Azure Health Data Services on Azure to improve your ability to safeguard your organization's health data.",
+      "azure_categories": [
+        "analytics",
+        "databases",
+        "integration"
+      ],
+      "display_azure_categories": [
+        "Analytics",
+        "Databases",
+        "Integration"
+      ],
+      "thumbnail_url": "/azure/architecture/browse/thumbs/azure-health-data-services.png",
+      "title": "Azure Health Data Services architecture guide",
+      "last_modified": "2023-08-09T00:00:00Z",
+      "locale": "en-us",
+      "products": [
+        "azure",
+        "azure-health-data-services",
+        "azure-api-management",
+        "azure-application-gateway",
+        "azure-synapse-analytics",
+        "azure-firewall"
+      ],
+      "display_products": [
+        "Azure",
+        "Azure Health Data Services",
+        "Azure API Management",
+        "Azure Application Gateway",
+        "Azure Synapse Analytics",
+        "Azure Firewall"
+      ],
+      "url": "/azure/architecture/guide/data/azure-health-data-services"
+    }
+  ],
+  "count": 835,
+  "@nextLink": "/api/contentbrowser/search/architectures?locale=en-us&$skip=30"
+}
