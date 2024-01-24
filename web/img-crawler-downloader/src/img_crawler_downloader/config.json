@@ -8,8 +8,8 @@
         ]
     },
     "crawler": {
-        "baseUrl": "https://learn.microsoft.com/",
-        "apiUrl": "api/contentbrowser/search/architectures",
+        "baseUrl": "https://learn.microsoft.com",
+        "apiUrl": "/api/contentbrowser/search/architectures",
         "locale": "en-us",
         "query": {
             "filter": {
@@ -23,7 +23,11 @@
         },
         "selector": {
             "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
-        }
+        },
+        "limit": 1, 
+        "_comment": "28 is the last page with a total of 835 records"
     },
-    "downloader": {}
+    "downloader": {
+        "location": "downloaded"
+    }
 }
