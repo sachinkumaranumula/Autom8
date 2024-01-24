@@ -4,6 +4,7 @@
 # python crawler-puller.py
 import argparse
 import json
+import os.path
 import time
 
 import requests
@@ -25,9 +26,14 @@ def input():
     icd = ImageCrawlerDownloader(config)
     url = icd.buildSeedApiUrl()
     print("GET: ", url)
-    apiResponse = icd.getApi(url)
+    apiJson = icd.getApi(url)
+
+    for item in apiJson["results"]:
+        print(item["thumbnail_url"])
+        icd.downloadImage("downloaded", f"{config["crawler"]["baseUrl"]}/{item["thumbnail_url"]}")
+
     with open("response.json", "w") as fp:
-        json.dump(apiResponse, fp, indent=2)
+        json.dump(apiJson, fp, indent=2)
 
 
 class ImageCrawlerDownloader:
@@ -42,9 +48,7 @@ class ImageCrawlerDownloader:
 
     def buildSeedApiUrl(self) -> str:
         crawler = self.config["crawler"]
-        return f"{crawler["baseUrl"]}\
-                /{crawler["apiUrl"]}\
-                /?locale={crawler["locale"]}"
+        return f"{crawler["baseUrl"]}/{crawler["apiUrl"]}/?locale={crawler["locale"]}"
 
     def getApi(self, url: str) -> dict:
         response = requests.get(url)
@@ -59,6 +63,13 @@ class ImageCrawlerDownloader:
     def findItemsOfInterest(self, html: str) -> ResultSet:
         soup = BeautifulSoup(html, "html5lib")
         return soup.find_all("div")
+
+    def downloadImage(self, downloadLocation: str, imgUrl: str):
+        os.makedirs(downloadLocation, exist_ok=True)
+        imgData = requests.get(imgUrl).content
+        imgLocation = os.path.join(downloadLocation, os.path.basename(imgUrl))
+        with open(imgLocation, 'wb') as handler:
+            handler.write(imgData)
 
     def __str__(self) -> str:
         return f"config=> {self.config}"
