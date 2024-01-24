@@ -80,6 +80,7 @@ def main():
     input()
     endTime = time.time()
 
+
     print(f"Total Time:{endTime - startTime}")
 
 

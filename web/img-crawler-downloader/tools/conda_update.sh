@@ -1,5 +1,5 @@
 #!/bin/bash
-# From within sub module
+# Usage: source conda_update.sh
 
 # LOCK DID NOT WORK ON MACOSX DUE TO CASE INSENSITIVE FILESYSTEM
 # Re-generate Conda lock file(s) based on environment.yml

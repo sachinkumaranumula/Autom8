@@ -4,3 +4,9 @@
 - https://www.pythoncheatsheet.org/blog/python-projects-with-poetry-and-vscode-part-1
 - https://stackoverflow.com/questions/70851048/does-it-make-sense-to-use-conda-poetry
 - https://github.com/conda-incubator/conda-tree
+
+# Setup
+- `source tools/conda_import.sh`
+- `source tools/conda_update.sh`
+- Ensure VS Code to select the right Python Interpreter i.e. *'img-crawler-downloader': conda* in the status bar
+

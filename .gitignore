@@ -9,3 +9,6 @@ generated/
 
 # Downloaded
 downloaded/
+
+# Poetry
+poetry.lock
