@@ -7,14 +7,13 @@ import json
 import os
 import time
 
-PATH_IMAGES = os.path.join("downloaded", "images")
+PATH_IMAGES = os.path.join(os.getcwd(), "downloaded", "images")
 
 
 def slotArchs():
+    print(PATH_IMAGES)
     arch_infos: dict = json.load(open("downloaded/collection/archs.json"))
-    print(arch_infos)
     for arch_info in arch_infos["archs"]:
-        print(arch_info)
         slotImages(arch_info, "categories")
         slotImages(arch_info, "products")
 
