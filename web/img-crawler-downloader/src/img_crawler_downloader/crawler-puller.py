@@ -18,6 +18,8 @@ FIELD_URL = "url"
 FIELD_CATEGORIES = "categories"
 FIELD_PRODUCTS = "products"
 FIELD_NAMES = [FIELD_TITLE, FIELD_SUMMARY, FIELD_THUMBNAIL, FIELD_URL, FIELD_CATEGORIES, FIELD_PRODUCTS]
+DOWNLOAD_SEGMENT_IMAGES = "images"
+DOWNLOAD_SEGMENT_COLLECTION = "collection"
 
 
 def get_config() -> dict:
@@ -37,12 +39,10 @@ def get_config() -> dict:
 
 def crawl_and_pull(config: dict):
     icd = ImageCrawlerDownloader(config)
-    icd.saveArchInfos()
-
-
-def dump_dict(dict, filename):
-    with open(filename, "w") as fp:
-        json.dump(dict, fp, indent=2)
+    arch_infos = icd.getArchInfos()
+    icd.saveArchInfosAsCSV(arch_infos)
+    icd.saveArchInfosAsJson(arch_infos)
+    icd.downloadThumbnails(arch_infos)
 
 
 def arch_info(title, summary, thumbnailUrl, url, categories, products) -> dict:
@@ -110,24 +110,37 @@ class ImageCrawlerDownloader:
                                         self.absoluteUrl(item["url"]), item["azure_categories"], item["products"]))
         return arch_infos
 
-    def saveArchInfos(self) -> None:
-        arch_infos = self.getArchInfos()
-        archsLocation = os.path.join(self.downloadLocation(), "archs.csv")
+    def saveArchInfosAsCSV(self, arch_infos: list) -> None:
+        archsLocation = os.path.join(self.downloadLocation(DOWNLOAD_SEGMENT_COLLECTION), "archs.csv")
         with open(archsLocation, 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=FIELD_NAMES)
             writer.writeheader()
             writer.writerows(arch_infos)
 
-    def downloadLocation(self) -> str:
-        downloadLocation = self.config["downloader"]["location"]
-        os.makedirs(downloadLocation, exist_ok=True)
-        return downloadLocation
+    def saveArchInfosAsJson(self, arch_infos: list) -> None:
+        arch_json: dict = {
+            'archs': arch_infos,
+            'count': len(arch_infos)
+        }
+        archsLocation = os.path.join(self.downloadLocation(DOWNLOAD_SEGMENT_COLLECTION), "archs.json")
+        with open(archsLocation, 'w') as jsonfile:
+            jsonfile.write(json.dumps(arch_json, indent=1))
+
+    def downloadThumbnails(self, arch_infos: list) -> None:
+        for arch_info in arch_infos:
+            self.downloadImage(arch_info["thumbnail"])
 
     def downloadImage(self, imgUrl: str) -> None:
         imgData = requests.get(imgUrl).content
-        imgLocation = os.path.join(self.downloadLocation(), os.path.basename(imgUrl))
+        imgLocation = os.path.join(self.downloadLocation(DOWNLOAD_SEGMENT_IMAGES), os.path.basename(imgUrl))
         with open(imgLocation, 'wb') as handler:
             handler.write(imgData)
+
+    def downloadLocation(self, segment) -> str:
+        downloadLocation = self.config["downloader"]["location"]
+        downloadPath = os.path.join(downloadLocation, segment)
+        os.makedirs(downloadPath, exist_ok=True)
+        return downloadPath
 
     def __str__(self) -> str:
         return f"config=> {self.config}"
