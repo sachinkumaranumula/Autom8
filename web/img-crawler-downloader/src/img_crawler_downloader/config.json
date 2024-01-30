@@ -1,33 +1,55 @@
 {
-    "job": {
-        "name": "azure-architecture-center",
-        "description": "Gets all architectural drawings from Azure Architecture Center",
-        "tags": [
-            "azure",
-            "visio"
-        ]
-    },
-    "crawler": {
-        "baseUrl": "https://learn.microsoft.com",
-        "apiUrl": "/api/contentbrowser/search/architectures",
-        "locale": "en-us",
-        "query": {
-            "filter": {
+  "job": {
+    "name": "multicloud-architecture-center",
+    "description": "Gets all architectural drawings from major Cloud Architecture Centers",
+    "tags": ["azure", "aws"]
+  },
+  "provider": {
+    "azure": {
+      "crawler": {
+        "api": {
+          "request": {
+            "baseUrl": "https://learn.microsoft.com",
+            "apiUrl": "/api/contentbrowser/search/architectures",
+            "locale": "en-us",
+            "query": {
+              "filter": {
                 "products": [],
+
                 "categories": []
-            },
-            "params": {
-                "pageParam": "skip",
-                "limit": 4
+              },
+              "pagination": {
+                "limit": 1,
+                "_comment": "28 is the last page with a total of 835 records"
+              }
             }
+          },
+          "response": {
+            "identifiers": {
+              "collection": "results",
+              "pagination": {
+                "nextUrl": "@nextLink"
+              },
+              "items": {
+                "title": "title",
+                "summary": "summary",
+                "thumbnail": "thumbnail",
+                "url": "url",
+                "categories": "categories",
+                "products": "products"
+              }
+            }
+          }
         },
-        "selector": {
+        "web": {
+          "selector": {
             "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
-        },
-        "limit": 28, 
-        "_comment": "28 is the last page with a total of 835 records"
-    },
-    "downloader": {
-        "location": "downloaded"
+          }
+        }
+      }
     }
+  },
+  "downloader": {
+    "location": "downloaded"
+  }
 }

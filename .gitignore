@@ -12,3 +12,7 @@ downloaded/
 
 # Poetry
 poetry.lock
+
+# Python
+__pycache__
+*.pyc
