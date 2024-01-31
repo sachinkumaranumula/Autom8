@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 from bs4 import BeautifulSoup, ResultSet
-from img_crawler_downloader.classes.arch import ArchInfo
+from classes.arch import ArchInfo
 
 
 class ArchApiCrawler:

@@ -1,6 +1,6 @@
 from typing import List, TypedDict
 
-from img_crawler_downloader.classes.config import Api, Config, Crawler
+from classes.config import Api, Config, Crawler
 
 # TODO: FINISH JOB CONFIG
 

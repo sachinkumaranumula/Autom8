@@ -7,9 +7,9 @@ import json
 import time
 from typing import List
 
-from img_crawler_downloader.classes import arch
-from img_crawler_downloader.classes.crawler import ArchApiCrawler
-from img_crawler_downloader.classes.exporter import ArchExporter
+from classes import arch
+from classes.crawler import ArchApiCrawler
+from classes.exporter import ArchExporter
 
 
 def get_config() -> dict:

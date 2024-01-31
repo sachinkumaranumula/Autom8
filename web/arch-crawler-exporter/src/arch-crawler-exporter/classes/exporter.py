@@ -4,7 +4,7 @@ import os.path
 from typing import List
 
 import requests
-from img_crawler_downloader.classes.arch import ArchCatalog, ArchInfo
+from classes.arch import ArchCatalog, ArchInfo
 
 DOWNLOAD_SEGMENT_IMAGES = "images"
 DOWNLOAD_SEGMENT_COLLECTION = "collection"
