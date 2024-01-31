@@ -13,3 +13,9 @@ class ArchInfo(TypedDict):
     @staticmethod  # type: ignore
     def keys():
         return [*ArchInfo.__dict__["__annotations__"].keys()]
+
+
+class ArchCatalog(TypedDict):
+    name: str
+    archs: List[ArchInfo]
+    count: int

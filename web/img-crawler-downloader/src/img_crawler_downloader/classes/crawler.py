@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 from bs4 import BeautifulSoup, ResultSet
-from img_crawler_downloader.classes.arch_info import ArchInfo
+from img_crawler_downloader.classes.arch import ArchInfo
 
 
 class ArchApiCrawler:
@@ -72,7 +72,6 @@ class ArchApiCrawler:
             try:
                 if nested:
                     item = item[nested["item"]]
-                    print(item)
                     if nested["displayInfo"]:
                         item = item[nested["displayInfo"]]
                 arch_info: ArchInfo = {"id": str(uuid.uuid4()),
@@ -92,7 +91,7 @@ class ArchApiCrawler:
 
     def __getFieldValue(self, item, item_fields, fieldName):
         if item_fields[fieldName] in item:
-            return self.__buildItemUrl(item[item_fields[fieldName]])
+            return item[item_fields[fieldName]]
         return "Unknown"
 
     def __str__(self) -> str:

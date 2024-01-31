@@ -86,7 +86,7 @@
       }
     }
   ],
-  "downloader": {
-    "location": "downloaded"
+  "exporter": {
+    "location": "exported"
   }
 }
