@@ -1,3 +1,4 @@
+import uuid
 from typing import List
 
 import requests
@@ -30,20 +31,34 @@ class ArchApiCrawler:
         resp_conf = self.config["response"]
         limit = req_conf["query"]["pagination"]["limit"]
         all_results = []
-        url = self.__buildSeedApiUrl()
+        seed_url = self.__buildSeedApiUrl()
+        url = seed_url
         page = 1
-        while url and page <= limit:
+        total = 1
+        count = 0
+        while count < total and page <= limit:
             try:
                 response = requests.get(url).json()
-                all_results.extend(response[resp_conf["identifiers"]["collection"]])
-                nextUrl = response[resp_conf["identifiers"]["pagination"]["nextUrl"]]
-                if nextUrl:
-                    url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                collection = response[resp_conf["identifiers"]["collection"]]
+                all_results.extend(collection)
+                count += len(collection)
+                if "nested" in resp_conf["identifiers"]:
+                    metadata = response[resp_conf["identifiers"]["nested"]["total"]]
+                    total = metadata[resp_conf["identifiers"]["total"]]
                 else:
-                    url = f"{url}&{response[resp_conf["identifiers"]["pagination"]["urlPrefix"]]}={page}"
+                    total = response[resp_conf["identifiers"]["total"]]
+                if "nextUrl" in resp_conf["identifiers"]["pagination"]:
+                    if resp_conf["identifiers"]["pagination"]["nextUrl"] in response:
+                        nextUrl = response[resp_conf["identifiers"]["pagination"]["nextUrl"]]
+                        if nextUrl:
+                            url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                    else:
+                        print("No more Next Page")
+                else:
+                    url = f"{seed_url}&{resp_conf["identifiers"]["pagination"]["urlPrefix"]}={page}"
                 page += 1
             except Exception as e:
-                print(e)
+                print("Exception Occured", e)
                 break
         return all_results
 
@@ -54,22 +69,31 @@ class ArchApiCrawler:
         item_fields = resp_conf["identifiers"]["item"]
         arch_infos: List[ArchInfo] = []
         for item in api_json:
-            print(item)
-            if nested:
-                item = item[nested["item"]]
-                if nested["additional"]:
-                    item = item[nested["additional"]]
-            arch_info: ArchInfo = {"title": item[item_fields["title"]],
-                                   "summary": item[item_fields["summary"]],
-                                   "url": self.__buildItemUrl(item[item_fields["url"]])}
-            if "thumbnail" in item_fields:
-                arch_info.update({"thumbnail": self.__buildItemUrl(item[item_fields["thumbnail"]])})
-            if "categories" in item_fields:
-                arch_info.update({"categories": item[item_fields["categories"]]})
-            if "products" in item_fields:
-                arch_info.update({"products": item[item_fields["products"]]})
-            arch_infos.append(arch_info)
+            try:
+                if nested:
+                    item = item[nested["item"]]
+                    print(item)
+                    if nested["displayInfo"]:
+                        item = item[nested["displayInfo"]]
+                arch_info: ArchInfo = {"id": str(uuid.uuid4()),
+                                       "title": self.__getFieldValue(item, item_fields, "title"),
+                                       "summary": self.__getFieldValue(item, item_fields, "summary"),
+                                       "url": self.__buildItemUrl(self.__getFieldValue(item, item_fields, "url"))}
+                if "thumbnail" in item_fields:
+                    arch_info.update({"thumbnail": self.__buildItemUrl(item[item_fields["thumbnail"]])})
+                if "categories" in item_fields:
+                    arch_info.update({"categories": item[item_fields["categories"]]})
+                if "products" in item_fields:
+                    arch_info.update({"products": item[item_fields["products"]]})
+                arch_infos.append(arch_info)
+            except KeyError:
+                continue
         return arch_infos
+
+    def __getFieldValue(self, item, item_fields, fieldName):
+        if item_fields[fieldName] in item:
+            return self.__buildItemUrl(item[item_fields[fieldName]])
+        return "Unknown"
 
     def __str__(self) -> str:
         return f"config=> {self.config}"

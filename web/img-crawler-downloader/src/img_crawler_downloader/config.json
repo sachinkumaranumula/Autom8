@@ -1,20 +1,18 @@
 {
-  "job": {
-    "name": "multicloud-architecture-center",
-    "description": "Gets all architectural drawings from major Cloud Architecture Centers",
-    "tags": ["azure", "aws"]
-  },
-  "provider": {
-    "azure": {
-      "crawler": {
+  "name": "multicloud-architecture-center",
+  "description": "Gets all architectural drawings from major Cloud Architecture Centers",
+  "tags": ["azure", "aws"],
+  "crawlers": [
+    {
+      "name": "azure",
+      "config": {
         "api": {
           "request": {
             "baseUrl": "https://learn.microsoft.com",
             "apiUrl": "/api/contentbrowser/search/architectures/?locale=en-us",
             "query": {
-              "size": 30,
               "pagination": {
-                "limit": 1,
+                "limit": 28,
                 "_comment": "28 is the last page with a total of 835 records"
               }
             }
@@ -33,7 +31,8 @@
                 "url": "url",
                 "categories": "azure_categories",
                 "products": "products"
-              }
+              },
+              "total": "count"
             }
           }
         },
@@ -44,26 +43,28 @@
         }
       }
     },
-    "aws": {
-      "crawler": {
+    {
+      "name": "aws",
+      "config": {
         "api": {
           "request": {
             "baseUrl": "https://aws.amazon.com",
-            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&size=15&item.locale=en_US",
+            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&size=250&item.locale=en_US",
             "query": {
               "pagination": {
-                "limit": 1,
+                "limit": 10,
                 "_comment": "28 is the last page with a total of 835 records"
               }
             }
           },
           "response": {
-            "aboluteUrls": true,
+            "absoluteUrls": true,
             "identifiers": {
               "collection": "items",
               "nested": {
                 "item": "item",
-                "additional": "additionalFields"
+                "displayInfo": "additionalFields",
+                "total": "metadata"
               },
               "pagination": {
                 "urlPrefix": "page"
@@ -72,7 +73,8 @@
                 "title": "headline",
                 "summary": "description",
                 "url": "headlineUrl"
-              }
+              },
+              "total": "totalHits"
             }
           }
         },
@@ -83,7 +85,7 @@
         }
       }
     }
-  },
+  ],
   "downloader": {
     "location": "downloaded"
   }
