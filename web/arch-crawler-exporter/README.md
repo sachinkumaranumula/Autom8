@@ -8,5 +8,9 @@
 # Setup
 - `source tools/conda_import.sh`
 - `source tools/conda_update.sh`
-- Ensure VS Code to select the right Python Interpreter i.e. *'img-crawler-downloader': conda* in the status bar
-
+- Ensure VS Code to select the right Python Interpreter i.e. *'arch-crawler-exporter': conda* in the status bar
+  
+# Run
+```bash
+python crawler-exporter.py -cf config.json
+```

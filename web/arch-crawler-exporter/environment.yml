@@ -1,4 +1,4 @@
-name: img-crawler-downloader
+name: arch-crawler-exporter
 channels:
   - pytorch
   - conda-forge

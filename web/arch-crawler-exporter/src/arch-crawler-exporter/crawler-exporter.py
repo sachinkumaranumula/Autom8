@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # python3 -m pip install -U {packages-to-install}
 # Run:
-# python crawler-puller.py
+# python crawler-exporter.py
 import argparse
 import json
 import time
-from itertools import count
 from typing import List
 
 from img_crawler_downloader.classes import arch
@@ -28,7 +27,7 @@ def get_config() -> dict:
     return config
 
 
-def crawl_and_pull(config: dict):
+def crawl_and_export(config: dict):
     # selective crawl and pull
     # crawler = ArchApiCrawler(config["crawlers"][0]["config"]["api"])
     arch_catalogs: List[arch.ArchCatalog] = []
@@ -52,7 +51,7 @@ def crawl_and_pull(config: dict):
 def main():
     startTime = time.time()
     config = get_config()
-    crawl_and_pull(config)
+    crawl_and_export(config)
     endTime = time.time()
     print(f"Total Time:{endTime - startTime}")
 

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "img-crawler-downloader"
+name = "arch-crawler-exporter"
 version = "0.1.0"
 description = "Crawls paginated sites and pulls all images"
 authors = ["Sachin Kumar Anumula"]
