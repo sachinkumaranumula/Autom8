@@ -12,11 +12,18 @@ class ArchApiCrawler:
 
     def __buildSeedApiUrl(self) -> str:
         req_conf = self.config["request"]
-        return f"{self.__absoluteUrl(req_conf["apiUrl"])}/?locale={req_conf["locale"]}"
+        return self.__absoluteUrl(req_conf["apiUrl"])
 
     def __absoluteUrl(self, url) -> str:
         req_conf = self.config["request"]
         return f"{req_conf["baseUrl"]}{url}"
+
+    def __buildItemUrl(self, url) -> str:
+        resp_conf = self.config["response"]
+        if resp_conf["absoluteUrls"]:
+            return url
+        else:
+            return self.__absoluteUrl(url)
 
     def __getArchResults(self) -> list:
         req_conf = self.config["request"]
@@ -24,29 +31,44 @@ class ArchApiCrawler:
         limit = req_conf["query"]["pagination"]["limit"]
         all_results = []
         url = self.__buildSeedApiUrl()
-        page = 0
-        while url and page < limit:
+        page = 1
+        while url and page <= limit:
             try:
                 response = requests.get(url).json()
                 all_results.extend(response[resp_conf["identifiers"]["collection"]])
-                url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                nextUrl = response[resp_conf["identifiers"]["pagination"]["nextUrl"]]
+                if nextUrl:
+                    url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                else:
+                    url = f"{url}&{response[resp_conf["identifiers"]["pagination"]["urlPrefix"]]}={page}"
                 page += 1
             except Exception as e:
                 print(e)
                 break
-        print(all_results)
         return all_results
 
     def getArchInfos(self) -> List[ArchInfo]:
         api_json = self.__getArchResults()
+        resp_conf = self.config["response"]
+        nested = resp_conf["identifiers"].get("nested")
+        item_fields = resp_conf["identifiers"]["item"]
         arch_infos: List[ArchInfo] = []
         for item in api_json:
-            arch_infos.append({"title": item["title"],
-                               "summary": item["summary"],
-                               "thumbnail": self.__absoluteUrl(item["thumbnail_url"]),
-                               "url": self.__absoluteUrl(item["url"]),
-                               "categories": item["azure_categories"],
-                               "products": item["products"]})
+            print(item)
+            if nested:
+                item = item[nested["item"]]
+                if nested["additional"]:
+                    item = item[nested["additional"]]
+            arch_info: ArchInfo = {"title": item[item_fields["title"]],
+                                   "summary": item[item_fields["summary"]],
+                                   "url": self.__buildItemUrl(item[item_fields["url"]])}
+            if "thumbnail" in item_fields:
+                arch_info.update({"thumbnail": self.__buildItemUrl(item[item_fields["thumbnail"]])})
+            if "categories" in item_fields:
+                arch_info.update({"categories": item[item_fields["categories"]]})
+            if "products" in item_fields:
+                arch_info.update({"products": item[item_fields["products"]]})
+            arch_infos.append(arch_info)
         return arch_infos
 
     def __str__(self) -> str:

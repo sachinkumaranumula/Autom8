@@ -1,13 +1,13 @@
-from typing import List, TypedDict
+from typing import List, NotRequired, TypedDict
 
 
 class ArchInfo(TypedDict):
     title: str
     summary: str
-    thumbnail: str
     url: str
-    categories: List[str]
-    products: List[str]
+    thumbnail: NotRequired[str]
+    categories: NotRequired[List[str]]
+    products: NotRequired[List[str]]
 
     @staticmethod  # type: ignore
     def keys():

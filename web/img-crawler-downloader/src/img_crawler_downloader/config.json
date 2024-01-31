@@ -10,14 +10,9 @@
         "api": {
           "request": {
             "baseUrl": "https://learn.microsoft.com",
-            "apiUrl": "/api/contentbrowser/search/architectures",
-            "locale": "en-us",
+            "apiUrl": "/api/contentbrowser/search/architectures/?locale=en-us",
             "query": {
-              "filter": {
-                "products": [],
-
-                "categories": []
-              },
+              "size": 30,
               "pagination": {
                 "limit": 1,
                 "_comment": "28 is the last page with a total of 835 records"
@@ -25,18 +20,58 @@
             }
           },
           "response": {
+            "absoluteUrls": false,
             "identifiers": {
               "collection": "results",
               "pagination": {
                 "nextUrl": "@nextLink"
               },
-              "items": {
+              "item": {
                 "title": "title",
                 "summary": "summary",
-                "thumbnail": "thumbnail",
+                "thumbnail": "thumbnail_url",
                 "url": "url",
-                "categories": "categories",
+                "categories": "azure_categories",
                 "products": "products"
+              }
+            }
+          }
+        },
+        "web": {
+          "selector": {
+            "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
+          }
+        }
+      }
+    },
+    "aws": {
+      "crawler": {
+        "api": {
+          "request": {
+            "baseUrl": "https://aws.amazon.com",
+            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&size=15&item.locale=en_US",
+            "query": {
+              "pagination": {
+                "limit": 1,
+                "_comment": "28 is the last page with a total of 835 records"
+              }
+            }
+          },
+          "response": {
+            "aboluteUrls": true,
+            "identifiers": {
+              "collection": "items",
+              "nested": {
+                "item": "item",
+                "additional": "additionalFields"
+              },
+              "pagination": {
+                "urlPrefix": "page"
+              },
+              "item": {
+                "title": "headline",
+                "summary": "description",
+                "url": "headlineUrl"
               }
             }
           }

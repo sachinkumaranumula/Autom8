@@ -26,10 +26,11 @@ def get_config() -> dict:
 
 
 def crawl_and_pull(config: dict):
+    # crawler = ArchApiCrawler(config["provider"]["azure"]["crawler"]["api"])
     crawler = ArchApiCrawler(config["provider"]["azure"]["crawler"]["api"])
-    exporter = ArchExporter(config)
     arch_infos = crawler.getArchInfos()
-    exporter.saveArchInfosAsCSV(arch_infos)
+    exporter = ArchExporter(config)
+    # exporter.saveArchInfosAsCSV(arch_infos)
     exporter.saveArchInfosAsJson(arch_infos)
     # exporter.downloadThumbnails(arch_infos)
 
