@@ -55,7 +55,7 @@ class ArchApiCrawler:
                         if nextUrl:
                             url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
                     else:
-                        print("No more Next Page")
+                        break
                 else:
                     url = f"{seed_url}&{resp_conf["identifiers"]["pagination"]["urlPrefix"]}={page}"
                 page += 1
@@ -120,7 +120,7 @@ class ArchWebCrawler:
                             valueAttribute: str) -> str:
         try:
             req = requests.get(url, self.HEADERS)
-            soup = BeautifulSoup(req.content, "html.parser")
+            soup = BeautifulSoup(req.content, "html.parser", from_encoding="iso-8859-1")
             img = soup.find(element, alt=re.compile(findRegex))
             if img is not None:
                 return img[valueAttribute]  # type: ignore
