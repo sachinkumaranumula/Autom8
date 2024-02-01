@@ -117,7 +117,7 @@ class ArchWebCrawler:
                             element: str,
                             findAttribute: str,
                             findRegex: str,
-                            valueAttribute: str) -> str:
+                            valueAttribute: str) -> str | None:
         try:
             req = requests.get(url, self.HEADERS)
             soup = BeautifulSoup(req.content, "html.parser", from_encoding="iso-8859-1")
@@ -125,10 +125,10 @@ class ArchWebCrawler:
             if img is not None:
                 return img[valueAttribute]  # type: ignore
             else:
-                return ""
+                return None
         except ParserRejectedMarkup:
             print("Cannot Parse", url)
-            return ""
+            return None
 
     def enrichWithSelectors(self, arch_infos):
         selectors = self.config["selectors"]
