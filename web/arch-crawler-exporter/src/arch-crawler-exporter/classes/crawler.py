@@ -1,8 +1,10 @@
+import re
 import uuid
 from typing import List
+from urllib.parse import urlparse
 
 import requests
-from bs4 import BeautifulSoup, ResultSet
+from bs4 import BeautifulSoup, ParserRejectedMarkup
 from classes.arch import ArchInfo
 
 
@@ -98,14 +100,55 @@ class ArchApiCrawler:
         return f"config=> {self.config}"
 
 
-class ApiWebCrawler:
+class ArchWebCrawler:
+    HEADERS = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Max-Age": "3600",
+        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0",
+    }
 
     def __init__(self, config: dict) -> None:
         self.config = config
 
-    def findItemsOfInterest(self, html: str) -> ResultSet:
-        soup = BeautifulSoup(html, "html5lib")
-        return soup.find_all("div")
+    def __findSelectorValue(self,
+                            url: str,
+                            element: str,
+                            findAttribute: str,
+                            findRegex: str,
+                            valueAttribute: str) -> str:
+        try:
+            req = requests.get(url, self.HEADERS)
+            soup = BeautifulSoup(req.content, "html.parser")
+            img = soup.find(element, alt=re.compile(findRegex))
+            if img is not None:
+                return img[valueAttribute]  # type: ignore
+            else:
+                return ""
+        except ParserRejectedMarkup:
+            print("Cannot Parse", url)
+            return ""
+
+    def enrichWithSelectors(self, arch_infos):
+        selectors = self.config["selectors"]
+        for key in selectors:
+            selector = selectors[key]
+            for arch_info in arch_infos:
+                url = arch_info[selector["archUrlRef"]]
+                scrapedValue = self.__findSelectorValue(
+                    url,
+                    selector["element"],
+                    selector["findAttribute"],
+                    selector["findRegex"],
+                    selector["valueAttribute"],
+                )
+                if scrapedValue:
+                    if bool(urlparse(scrapedValue).netloc):
+                        arch_info[key] = scrapedValue
+                    else:
+                        parse_result = urlparse(url)
+                        arch_info[key] = f"{parse_result.scheme}://{parse_result.netloc}{scrapedValue}"
 
     def __str__(self) -> str:
         return f"config=> {self.config}"

@@ -35,11 +35,6 @@
               "total": "count"
             }
           }
-        },
-        "web": {
-          "selector": {
-            "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
-          }
         }
       }
     },
@@ -49,7 +44,7 @@
         "api": {
           "request": {
             "baseUrl": "https://aws.amazon.com",
-            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&size=250&item.locale=en_US",
+            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
             "query": {
               "pagination": {
                 "limit": 10,
@@ -79,8 +74,14 @@
           }
         },
         "web": {
-          "selector": {
-            "item": "/html/body/div[2]/div/section/div/div/main/div[2]/section[2]/div/div/div[2]/ul/li[1]"
+          "selectors": {
+            "thumbnail": {
+              "archUrlRef": "url",
+              "element": "img",
+              "findAttribute": "alt",
+              "findRegex": "^(?!Warning|\\s*$).+",
+              "valueAttribute": "src" 
+            }
           }
         }
       }

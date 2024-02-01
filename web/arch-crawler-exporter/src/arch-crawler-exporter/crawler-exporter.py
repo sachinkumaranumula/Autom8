@@ -8,11 +8,11 @@ import time
 from typing import List
 
 from classes import arch
-from classes.crawler import ArchApiCrawler
+from classes.crawler import ArchApiCrawler, ArchWebCrawler
 from classes.exporter import ArchExporter
 
 
-def get_config() -> dict:
+def __getConfig() -> dict:
     configParser = argparse.ArgumentParser()
     configParser.add_argument(
         "-cf",
@@ -27,31 +27,46 @@ def get_config() -> dict:
     return config
 
 
-def crawl_and_export(config: dict):
-    # selective crawl and pull
-    # crawler = ArchApiCrawler(config["crawlers"][0]["config"]["api"])
+def __crawlAndExport(config: dict):
     arch_catalogs: List[arch.ArchCatalog] = []
     for crawl_config in config["crawlers"]:
-        print("Started Fetching Catalog: ", crawl_config["name"])
-        crawler = ArchApiCrawler(crawl_config["config"]["api"])
-        arch_infos: List[arch.ArchInfo] = crawler.getArchInfos()
-        arch_catalog: arch.ArchCatalog = {
-            "name": crawl_config["name"],
-            "archs": arch_infos,
-            "count": len(arch_infos),
-        }
-        arch_catalogs.append(arch_catalog)
-        print("Finished Fetching Catalog: ", crawl_config["name"])
+        arch_catalogs.append(__crawlArchs(crawl_config))
+    __exportCatalogs(config, arch_catalogs)
+
+
+def __exportCatalogs(config, arch_catalogs):
     exporter = ArchExporter(config["exporter"])
     exporter.saveArchInfosAsCSV(arch_catalogs)
     exporter.saveArchInfosAsJson(arch_catalogs)
     # exporter.downloadThumbnails(arch_catalogs)
 
 
+def __crawlArchs(crawl_config) -> arch.ArchCatalog:
+    print("Started Fetching Catalog: ", crawl_config["name"])
+    api_crawler = ArchApiCrawler(crawl_config["config"]["api"])
+    arch_infos: List[arch.ArchInfo] = api_crawler.getArchInfos()
+    __webCrawlIfNecessary(
+        crawl_config, arch_infos, crawl_config["config"]["api"]["request"]["baseUrl"]
+    )
+    arch_catalog: arch.ArchCatalog = {
+        "name": crawl_config["name"],
+        "archs": arch_infos,
+        "count": len(arch_infos),
+    }
+    print("Finished Fetching Catalog: ", crawl_config["name"])
+    return arch_catalog
+
+
+def __webCrawlIfNecessary(crawl_config, arch_infos, baseUrl) -> None:
+    if "web" in crawl_config["config"]:
+        web_crawler = ArchWebCrawler(crawl_config["config"]["web"])
+        web_crawler.enrichWithSelectors(arch_infos)
+
+
 def main():
     startTime = time.time()
-    config = get_config()
-    crawl_and_export(config)
+    config = __getConfig()
+    __crawlAndExport(config)
     endTime = time.time()
     print(f"Total Time:{endTime - startTime}")
 
