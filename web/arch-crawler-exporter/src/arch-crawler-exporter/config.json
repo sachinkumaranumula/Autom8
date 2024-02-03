@@ -183,7 +183,7 @@
             "api": {
               "request": {
                 "baseUrl": "https://cloud.google.com",
-                "apiUrl": "/all-jss-guides/index.json",
+                "apiUrl": "/architecture/all-jss-guides/index.json",
                 "query": {
                   "pagination": {
                     "limit": 1,
