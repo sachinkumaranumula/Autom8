@@ -1,0 +1,54 @@
+{
+  "name": "multicloud-architecture-center",
+  "description": "Gets all architectural drawings from major Cloud Architecture Centers",
+  "tags": ["gcloud"],
+  "crawlerGroups": [
+    {
+      "name": "gcloud",
+      "crawlers": [
+        {
+          "name": "gcloud-ref-archs",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://cloud.google.com",
+                "apiUrl": "/architecture/all-reference-architectures/index.json",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "assets",
+                  "item": {
+                    "title": "name",
+                    "summary": "blurb",
+                    "url": "link"
+                  }
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Google Cloud|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "exporter": {
+    "location": "exported"
+  }
+}

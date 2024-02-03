@@ -29,8 +29,11 @@ def __getConfig() -> dict:
 
 def __crawlAndExport(config: dict):
     arch_catalogs: List[arch.ArchCatalog] = []
-    for crawl_config in config["crawlers"]:
-        arch_catalogs.append(__crawlArchs(crawl_config))
+    for crawl_group in config["crawlerGroups"]:
+        arch_infos: List[arch.ArchInfo] = []
+        for crawl_config in crawl_group["crawlers"]:
+            arch_infos.extend(__crawlArchs(crawl_config))
+        arch_catalogs.append(__makeArchCatalog(crawl_group, arch_infos))
     __exportCatalogs(config, arch_catalogs)
 
 
@@ -41,20 +44,24 @@ def __exportCatalogs(config, arch_catalogs):
     # exporter.downloadThumbnails(arch_catalogs)
 
 
-def __crawlArchs(crawl_config) -> arch.ArchCatalog:
-    print("Started Fetching Catalog: ", crawl_config["name"])
+def __makeArchCatalog(crawl_group_config, arch_infos) -> arch.ArchCatalog:
+    arch_catalog: arch.ArchCatalog = {
+        "name": crawl_group_config["name"],
+        "archs": arch_infos,
+        "count": len(arch_infos),
+    }
+    return arch_catalog
+
+
+def __crawlArchs(crawl_config) -> List[arch.ArchInfo]:
+    print("Started Fetching:", crawl_config["name"])
     api_crawler = ArchApiCrawler(crawl_config["config"]["api"])
     arch_infos: List[arch.ArchInfo] = api_crawler.getArchInfos()
     __webCrawlIfNecessary(
         crawl_config, arch_infos, crawl_config["config"]["api"]["request"]["baseUrl"]
     )
-    arch_catalog: arch.ArchCatalog = {
-        "name": crawl_config["name"],
-        "archs": arch_infos,
-        "count": len(arch_infos),
-    }
-    print("Finished Fetching Catalog: ", crawl_config["name"])
-    return arch_catalog
+    print("Finished Fetching:", crawl_config["name"])
+    return arch_infos
 
 
 def __webCrawlIfNecessary(crawl_config, arch_infos, baseUrl) -> None:

@@ -1,90 +1,270 @@
 {
   "name": "multicloud-architecture-center",
   "description": "Gets all architectural drawings from major Cloud Architecture Centers",
-  "tags": ["azure", "aws"],
-  "crawlers": [
+  "tags": ["azure", "aws", "gcloud"],
+  "crawlerGroups": [
     {
       "name": "azure",
-      "config": {
-        "api": {
-          "request": {
-            "baseUrl": "https://learn.microsoft.com",
-            "apiUrl": "/api/contentbrowser/search/architectures/?locale=en-us",
-            "query": {
-              "pagination": {
-                "limit": 28,
-                "_comment": "28 is the last page with a total of 835 records"
+      "crawlers": [
+        {
+          "name": "azure",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://learn.microsoft.com",
+                "apiUrl": "/api/contentbrowser/search/architectures/?locale=en-us",
+                "query": {
+                  "pagination": {
+                    "limit": 28,
+                    "_comment": "28 is the last page with a total of 835 records"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "results",
+                  "pagination": {
+                    "nextUrl": "@nextLink"
+                  },
+                  "item": {
+                    "title": "title",
+                    "summary": "summary",
+                    "thumbnail": "thumbnail_url",
+                    "url": "url",
+                    "categories": "azure_categories",
+                    "products": "products"
+                  },
+                  "total": "count"
+                }
               }
-            }
-          },
-          "response": {
-            "absoluteUrls": false,
-            "identifiers": {
-              "collection": "results",
-              "pagination": {
-                "nextUrl": "@nextLink"
-              },
-              "item": {
-                "title": "title",
-                "summary": "summary",
-                "thumbnail": "thumbnail_url",
-                "url": "url",
-                "categories": "azure_categories",
-                "products": "products"
-              },
-              "total": "count"
             }
           }
         }
-      }
+      ]
     },
     {
       "name": "aws",
-      "config": {
-        "api": {
-          "request": {
-            "baseUrl": "https://aws.amazon.com",
-            "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
-            "query": {
-              "pagination": {
-                "limit": 10,
-                "_comment": "28 is the last page with a total of 835 records"
+      "crawlers": [
+        {
+          "name": "aws",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://aws.amazon.com",
+                "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
+                "query": {
+                  "pagination": {
+                    "limit": 10,
+                    "_comment": "28 is the last page with a total of 835 records"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": true,
+                "identifiers": {
+                  "collection": "items",
+                  "nested": {
+                    "item": "item",
+                    "displayInfo": "additionalFields",
+                    "total": "metadata"
+                  },
+                  "pagination": {
+                    "urlPrefix": "page"
+                  },
+                  "item": {
+                    "title": "headline",
+                    "summary": "description",
+                    "url": "headlineUrl"
+                  },
+                  "total": "totalHits"
+                }
               }
-            }
-          },
-          "response": {
-            "absoluteUrls": true,
-            "identifiers": {
-              "collection": "items",
-              "nested": {
-                "item": "item",
-                "displayInfo": "additionalFields",
-                "total": "metadata"
-              },
-              "pagination": {
-                "urlPrefix": "page"
-              },
-              "item": {
-                "title": "headline",
-                "summary": "description",
-                "url": "headlineUrl"
-              },
-              "total": "totalHits"
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Warning|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
             }
           }
         },
-        "web": {
-          "selectors": {
-            "thumbnail": {
-              "archUrlRef": "url",
-              "element": "img",
-              "findAttribute": "alt",
-              "findRegex": "^(?!Warning|\\s*$).+",
-              "valueAttribute": "src" 
+        {
+          "name": "aws",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://aws.amazon.com",
+                "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
+                "query": {
+                  "pagination": {
+                    "limit": 10,
+                    "_comment": "28 is the last page with a total of 835 records"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": true,
+                "identifiers": {
+                  "collection": "items",
+                  "nested": {
+                    "item": "item",
+                    "displayInfo": "additionalFields",
+                    "total": "metadata"
+                  },
+                  "pagination": {
+                    "urlPrefix": "page"
+                  },
+                  "item": {
+                    "title": "headline",
+                    "summary": "description",
+                    "url": "headlineUrl"
+                  },
+                  "total": "totalHits"
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Warning|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
             }
           }
         }
-      }
+      ]
+    },
+    {
+      "name": "gcloud",
+      "crawlers": [
+        {
+          "name": "gcloud-ref-archs",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://cloud.google.com",
+                "apiUrl": "/architecture/all-reference-architectures/index.json",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "assets",
+                  "item": {
+                    "title": "name",
+                    "summary": "blurb",
+                    "url": "link"
+                  }
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Google Cloud|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "gcloud-design-guides",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://cloud.google.com",
+                "apiUrl": "/architecture/all-design-guides/index.json",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "assets",
+                  "item": {
+                    "title": "name",
+                    "summary": "blurb",
+                    "url": "link"
+                  }
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Google Cloud|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "gcloud-jump-starts",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://cloud.google.com",
+                "apiUrl": "/all-jss-guides/index.json",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "assets",
+                  "item": {
+                    "title": "name",
+                    "summary": "blurb",
+                    "url": "link"
+                  }
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Google Cloud|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "exporter": {

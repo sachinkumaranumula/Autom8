@@ -47,17 +47,18 @@ class ArchApiCrawler:
                 if "nested" in resp_conf["identifiers"]:
                     metadata = response[resp_conf["identifiers"]["nested"]["total"]]
                     total = metadata[resp_conf["identifiers"]["total"]]
-                else:
+                elif "total" in resp_conf["identifiers"]:
                     total = response[resp_conf["identifiers"]["total"]]
-                if "nextUrl" in resp_conf["identifiers"]["pagination"]:
-                    if resp_conf["identifiers"]["pagination"]["nextUrl"] in response:
-                        nextUrl = response[resp_conf["identifiers"]["pagination"]["nextUrl"]]
-                        if nextUrl:
-                            url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                if "pagination" in resp_conf["identifiers"]:
+                    if "nextUrl" in resp_conf["identifiers"]["pagination"]:
+                        if resp_conf["identifiers"]["pagination"]["nextUrl"] in response:
+                            nextUrl = response[resp_conf["identifiers"]["pagination"]["nextUrl"]]
+                            if nextUrl:
+                                url = self.__absoluteUrl(response[resp_conf["identifiers"]["pagination"]["nextUrl"]])
+                        else:
+                            break
                     else:
-                        break
-                else:
-                    url = f"{seed_url}&{resp_conf["identifiers"]["pagination"]["urlPrefix"]}={page}"
+                        url = f"{seed_url}&{resp_conf["identifiers"]["pagination"]["urlPrefix"]}={page}"
                 page += 1
             except Exception as e:
                 print("Exception Occured", e)
