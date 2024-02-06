@@ -14,3 +14,6 @@
 ```bash
 python crawler-exporter.py -cf config.json
 ```
+
+# Future
+[Hexagonal Architecture](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/structure-a-python-project-in-hexagonal-architecture-using-aws-lambda.html?did=pg_card&trk=pg_card)
