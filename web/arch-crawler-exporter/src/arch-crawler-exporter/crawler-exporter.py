@@ -57,14 +57,12 @@ def __crawlArchs(crawl_config) -> List[arch.ArchInfo]:
     print("Started Fetching:", crawl_config["name"])
     api_crawler = ArchApiCrawler(crawl_config["config"]["api"])
     arch_infos: List[arch.ArchInfo] = api_crawler.getArchInfos()
-    __webCrawlIfNecessary(
-        crawl_config, arch_infos, crawl_config["config"]["api"]["request"]["baseUrl"]
-    )
+    __webCrawlIfNecessary(crawl_config, arch_infos)
     print("Finished Fetching:", crawl_config["name"])
     return arch_infos
 
 
-def __webCrawlIfNecessary(crawl_config, arch_infos, baseUrl) -> None:
+def __webCrawlIfNecessary(crawl_config, arch_infos) -> None:
     if "web" in crawl_config["config"]:
         web_crawler = ArchWebCrawler(crawl_config["config"]["web"])
         web_crawler.enrichWithSelectors(arch_infos)

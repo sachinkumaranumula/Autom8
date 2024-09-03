@@ -1,0 +1,63 @@
+{
+  "name": "multicloud-architecture-center",
+  "description": "Gets all architectural drawings from major Cloud Architecture Centers",
+  "tags": ["aws"],
+  "crawlerGroups": [
+    {
+      "name": "aws",
+      "crawlers": [
+        {
+          "name": "aws",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://aws.amazon.com",
+                "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": true,
+                "identifiers": {
+                  "collection": "items",
+                  "nested": {
+                    "item": "item",
+                    "displayInfo": "additionalFields",
+                    "total": "metadata"
+                  },
+                  "pagination": {
+                    "urlPrefix": "page"
+                  },
+                  "item": {
+                    "title": "headline",
+                    "summary": "description",
+                    "url": "headlineUrl"
+                  },
+                  "total": "totalHits"
+                }
+              }
+            },
+            "web": {
+              "selectors": {
+                "thumbnail": {
+                  "archUrlRef": "url",
+                  "element": "img",
+                  "findAttribute": "alt",
+                  "findRegex": "^(?!Warning|\\s*$).+",
+                  "valueAttribute": "src"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "exporter": {
+    "location": "exported"
+  }
+}

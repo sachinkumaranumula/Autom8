@@ -55,8 +55,8 @@
                 "apiUrl": "/api/dirs/items/search?item.directoryId=alias%23architecture-center&sort_by=item.additionalFields.sortDate&sort_order=desc&size=100&item.locale=en_US&tags.id=GLOBAL%23content-type%23pattern%7CGLOBAL%23content-type%23reference-arch-diagram%7CGLOBAL%23content-type%23solution",
                 "query": {
                   "pagination": {
-                    "limit": 10,
-                    "_comment": "28 is the last page with a total of 835 records"
+                    "limit": 15,
+                    "_comment": "15 is the last page with a total of 2533 records"
                   }
                 }
               },

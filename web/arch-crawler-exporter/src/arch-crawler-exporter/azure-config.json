@@ -1,0 +1,50 @@
+{
+  "name": "multicloud-architecture-center",
+  "description": "Gets all architectural drawings from major Cloud Architecture Centers",
+  "tags": ["azure"],
+  "crawlerGroups": [
+    {
+      "name": "azure",
+      "crawlers": [
+        {
+          "name": "azure",
+          "config": {
+            "api": {
+              "request": {
+                "baseUrl": "https://learn.microsoft.com",
+                "apiUrl": "/api/contentbrowser/search/architectures/?locale=en-us",
+                "query": {
+                  "pagination": {
+                    "limit": 1,
+                    "_comment": "single page dump"
+                  }
+                }
+              },
+              "response": {
+                "absoluteUrls": false,
+                "identifiers": {
+                  "collection": "results",
+                  "pagination": {
+                    "nextUrl": "@nextLink"
+                  },
+                  "item": {
+                    "title": "title",
+                    "summary": "summary",
+                    "thumbnail": "thumbnail_url",
+                    "url": "url",
+                    "categories": "azure_categories",
+                    "products": "products"
+                  },
+                  "total": "count"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "exporter": {
+    "location": "exported"
+  }
+}

@@ -67,6 +67,7 @@ class ArchApiCrawler:
 
     def getArchInfos(self) -> List[ArchInfo]:
         api_json = self.__getArchResults()
+        print("Need Processing:", len(api_json))
         resp_conf = self.config["response"]
         nested = resp_conf["identifiers"].get("nested")
         item_fields = resp_conf["identifiers"]["item"]
@@ -88,14 +89,16 @@ class ArchApiCrawler:
                 if "products" in item_fields:
                     arch_info.update({"products": item[item_fields["products"]]})
                 arch_infos.append(arch_info)
-            except KeyError:
+                print(f"Processed {arch_info['id']}: {arch_info['title']}")
+            except (KeyError, ValueError) as error:
+                print(f"Cannot process:{item} due to {error}")
                 continue
         return arch_infos
 
     def __getFieldValue(self, item, item_fields, fieldName):
         if item_fields[fieldName] in item:
             return item[item_fields[fieldName]]
-        return "Unknown"
+        raise ValueError
 
     def __str__(self) -> str:
         return f"config=> {self.config}"
@@ -120,7 +123,7 @@ class ArchWebCrawler:
                             findRegex: str,
                             valueAttribute: str) -> str | None:
         try:
-            req = requests.get(url, self.HEADERS)
+            req = requests.get(url, self.HEADERS, timeout=(3, 5))
             soup = BeautifulSoup(req.content, "html.parser", from_encoding="iso-8859-1")
             img = soup.find(element, alt=re.compile(findRegex))
             if img is not None:
@@ -129,6 +132,9 @@ class ArchWebCrawler:
                 return None
         except ParserRejectedMarkup:
             print("Cannot Parse", url)
+            return None
+        except requests.ReadTimeout:
+            print("Read timedout", url)
             return None
 
     def enrichWithSelectors(self, arch_infos):
